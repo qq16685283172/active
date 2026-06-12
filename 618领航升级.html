@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>618 领航升级计划</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-snap-type:y mandatory}
+body{font-family:'Noto Serif SC','STSong','Microsoft YaHei',serif;color:#fff;overflow-x:hidden;background:#0a0a14}
+
+/* ====== 全屏滚动 ====== */
+.section{min-height:100vh;scroll-snap-align:start;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:60px 20px}
+
+/* ====== 导航点 ====== */
+.nav-dots{position:fixed;right:24px;top:50%;transform:translateY(-50%);z-index:100;display:flex;flex-direction:column;gap:16px}
+.nav-dot{width:10px;height:10px;border-radius:50%;border:2px solid rgba(255,255,255,.3);background:transparent;cursor:pointer;transition:all .3s}
+.nav-dot.active{background:#d4a853;border-color:#d4a853;box-shadow:0 0 12px rgba(212,168,83,.4)}
+
+/* ====== 第一屏：大促封面 ====== */
+.s1{background:linear-gradient(160deg,#1a0a0a 0%,#2d0f0f 25%,#1a0a14 55%,#0a0a14 100%);flex-direction:column}
+
+/* 光芒 */
+.s1::before{content:'';position:absolute;top:-40%;left:50%;transform:translateX(-50%);width:800px;height:800px;background:radial-gradient(ellipse,rgba(212,168,83,.06) 0%,transparent 70%);pointer-events:none;animation:glowPulse 4s ease-in-out infinite}
+@keyframes glowPulse{0%,100%{opacity:.6;transform:translateX(-50%) scale(1)}50%{opacity:1;transform:translateX(-50%) scale(1.15)}}
+
+/* 顶部标签 */
+.s1-tag{display:inline-block;padding:6px 24px;font-size:12px;font-weight:700;letter-spacing:6px;color:#d4a853;border:1px solid rgba(212,168,83,.25);border-radius:2px;margin-bottom:40px;position:relative;z-index:1}
+
+/* 主标题 */
+.s1 h1{font-size:clamp(36px,7vw,64px);font-weight:900;letter-spacing:8px;line-height:1.2;text-align:center;position:relative;z-index:1;margin-bottom:16px}
+.s1 h1 .gold{background:linear-gradient(180deg,#ffd700 20%,#d4a853 50%,#b8942e 80%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+/* 618 数字 */
+.big-number{font-size:clamp(80px,14vw,160px);font-weight:900;line-height:1;letter-spacing:4px;text-align:center;position:relative;z-index:1;margin-bottom:8px;background:linear-gradient(180deg,#ffd700 0%,#c41e3a 40%,#8b0000 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;filter:drop-shadow(0 0 60px rgba(196,30,58,.3))}
+
+/* 副标题 */
+.s1 .sub{font-size:15px;letter-spacing:10px;color:rgba(255,255,255,.5);text-align:center;position:relative;z-index:1;margin-bottom:12px}
+
+/* 倒计时区 */
+.countdown{display:flex;gap:16px;margin-bottom:48px;position:relative;z-index:1}
+.countdown .cd-item{text-align:center}
+.countdown .cd-num{font-size:36px;font-weight:900;color:#ffd700;letter-spacing:2px;font-variant-numeric:tabular-nums}
+.countdown .cd-label{font-size:11px;color:rgba(255,255,255,.35);letter-spacing:2px;margin-top:2px}
+.countdown .cd-sep{font-size:36px;color:rgba(255,255,255,.2);line-height:1}
+
+/* 按钮 */
+.s1 .btn-go{padding:18px 80px;font-size:17px;font-weight:700;letter-spacing:6px;color:#1a0a0a;background:linear-gradient(135deg,#ffd700,#d4a853);border:none;border-radius:50px;cursor:pointer;position:relative;z-index:1;transition:all .35s;box-shadow:0 8px 40px rgba(212,168,83,.25)}
+.s1 .btn-go:hover{transform:translateY(-3px);box-shadow:0 16px 56px rgba(212,168,83,.4)}
+.s1 .btn-go:active{transform:translateY(0)}
+
+.scroll-down{position:absolute;bottom:40px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.2);font-size:12px;letter-spacing:4px;animation:bd 2s infinite;z-index:1}
+@keyframes bd{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(10px)}}
+
+/* 装饰粒子 */
+.s1-particle{position:absolute;border-radius:50%;pointer-events:none;background:rgba(255,215,0,.15);animation:fp linear infinite}
+@keyframes fp{0%{transform:translateY(0) translateX(0) scale(1);opacity:0}10%{opacity:1}90%{opacity:.2}100%{transform:translateY(-100vh) translateX(80px) scale(.3);opacity:0}}
+
+/* ====== 第二屏：权益对比 ====== */
+.s2{background:linear-gradient(180deg,#0a0a14 0%,#0d0d20 30%,#0a0a18 100%);flex-direction:column}
+.s2 .section-title{font-size:28px;font-weight:900;letter-spacing:6px;text-align:center;margin-bottom:8px;position:relative;z-index:1}
+.s2 .section-title .gold{color:#ffd700}
+.s2 .section-desc{font-size:13px;color:rgba(255,255,255,.35);letter-spacing:4px;margin-bottom:48px;text-align:center;position:relative;z-index:1}
+
+/* 对比卡片 */
+.compare-wrap{display:flex;gap:24px;max-width:800px;width:100%;flex-wrap:wrap;justify-content:center;position:relative;z-index:1}
+
+.compare-card{flex:1;min-width:260px;max-width:360px;border-radius:20px;padding:40px 28px 36px;text-align:center;position:relative;overflow:hidden}
+.compare-card.old{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06)}
+.compare-card.new{background:linear-gradient(160deg,rgba(196,30,58,.08),rgba(212,168,83,.04));border:2px solid rgba(255,215,0,.25);box-shadow:0 0 60px rgba(212,168,83,.06)}
+
+.compare-card .plan-name{font-size:18px;font-weight:900;letter-spacing:4px;margin-bottom:6px}
+.compare-card.old .plan-name{color:rgba(255,255,255,.4)}
+.compare-card.new .plan-name{color:#ffd700}
+
+.compare-card .plan-price{font-size:32px;font-weight:900;letter-spacing:2px;margin-bottom:4px}
+.compare-card.old .plan-price{color:rgba(255,255,255,.3);text-decoration:line-through}
+.compare-card.new .plan-price{color:#fff}
+
+.compare-card .plan-badge{display:inline-block;padding:4px 16px;font-size:11px;font-weight:700;letter-spacing:3px;border-radius:20px;margin-bottom:28px}
+.compare-card.old .plan-badge{background:rgba(255,255,255,.04);color:rgba(255,255,255,.3)}
+.compare-card.new .plan-badge{background:linear-gradient(135deg,#c41e3a,#a01830);color:#fff}
+
+.compare-card .feature-list{list-style:none;text-align:left}
+.compare-card .feature-list li{padding:10px 0;font-size:14px;letter-spacing:1px;border-bottom:1px solid rgba(255,255,255,.04);display:flex;align-items:center;gap:10px}
+.compare-card .feature-list li .check{font-size:12px}
+.compare-card.old .feature-list li{color:rgba(255,255,255,.35)}
+.compare-card.old .feature-list li .check{color:rgba(255,255,255,.15)}
+.compare-card.new .feature-list li{color:rgba(255,255,255,.75)}
+.compare-card.new .feature-list li .check{color:#d4a853}
+
+.compare-card.new::after{content:'限时立减 ¥618';position:absolute;top:16px;right:-32px;padding:4px 40px;font-size:11px;font-weight:700;letter-spacing:2px;color:#fff;background:linear-gradient(135deg,#c41e3a,#8b0000);transform:rotate(45deg)}
+
+/* 对比底部 CTA */
+.s2 .btn-to-s3{margin-top:48px;padding:14px 56px;font-size:15px;font-weight:700;letter-spacing:6px;color:#fff;background:transparent;border:1px solid rgba(255,215,0,.3);border-radius:50px;cursor:pointer;transition:all .3s;position:relative;z-index:1}
+.s2 .btn-to-s3:hover{background:rgba(255,215,0,.08);border-color:rgba(255,215,0,.6)}
+
+/* ====== 第三屏：福利领取 ====== */
+.s3{background:linear-gradient(160deg,#0a0a14 0%,#0d0f1a 30%,#0a0a18 100%);flex-direction:column}
+
+.claim-card{background:linear-gradient(160deg,rgba(20,18,30,.95),rgba(15,12,25,.98));border:1px solid rgba(212,168,83,.1);border-radius:24px;padding:48px 36px;max-width:440px;width:100%;text-align:center;position:relative;z-index:1;box-shadow:0 0 80px rgba(212,168,83,.04)}
+.claim-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,#d4a853,transparent)}
+
+.claim-card h3{font-size:22px;font-weight:900;letter-spacing:4px;margin-bottom:6px}
+.claim-card h3 .gold{color:#ffd700}
+
+.claim-card .claim-sub{font-size:13px;color:rgba(255,255,255,.35);letter-spacing:3px;margin-bottom:36px}
+
+/* 权益标签 */
+.claim-benefits{display:flex;justify-content:center;gap:12px;margin-bottom:32px;flex-wrap:wrap}
+.claim-benefit{padding:10px 16px;background:rgba(255,215,0,.04);border:1px solid rgba(255,215,0,.08);border-radius:10px;font-size:12px;color:rgba(255,255,255,.55);letter-spacing:2px}
+
+/* 输入框 */
+.claim-input-group{position:relative;margin-bottom:12px}
+.claim-input-group input{width:100%;padding:16px 20px;font-size:16px;color:#fff;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:12px;outline:none;text-align:center;letter-spacing:2px;transition:all .3s;font-family:inherit}
+.claim-input-group input::placeholder{color:rgba(255,255,255,.15)}
+.claim-input-group input:focus{border-color:#d4a853;background:rgba(255,215,0,.03);box-shadow:0 0 30px rgba(212,168,83,.06)}
+.claim-error{font-size:12px;color:#ff4757;margin-top:6px;display:none;letter-spacing:1px}
+
+/* 按钮 */
+.claim-btn{width:100%;padding:16px;font-size:17px;font-weight:700;letter-spacing:4px;color:#1a0a0a;background:linear-gradient(135deg,#ffd700,#d4a853);border:none;border-radius:12px;cursor:pointer;transition:all .3s;margin-top:8px;position:relative;overflow:hidden}
+.claim-btn:hover{box-shadow:0 12px 40px rgba(212,168,83,.3);transform:translateY(-2px)}
+.claim-btn:active{transform:translateY(0)}
+.claim-btn.loading{opacity:.7;pointer-events:none}
+.claim-btn .spinner{display:none;width:18px;height:18px;border:2px solid transparent;border-top-color:#1a0a0a;border-radius:50%;vertical-align:middle;margin-right:8px;animation:spin .6s linear infinite}
+.claim-btn.loading .spinner{display:inline-block}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* 成功弹窗 */
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:200;display:none;justify-content:center;align-items:center;backdrop-filter:blur(6px)}
+.overlay.show{display:flex}
+.success-box{background:linear-gradient(160deg,rgba(20,18,30,.98),rgba(15,12,25,.98));border:1px solid rgba(212,168,83,.2);border-radius:24px;padding:48px 36px;text-align:center;max-width:380px;width:90%;animation:popIn .4s ease}
+@keyframes popIn{from{opacity:0;transform:scale(.85) translateY(20px)}to{opacity:1;transform:scale(1) translateY(0)}}
+.success-icon{width:72px;height:72px;margin:0 auto 24px;border-radius:50%;background:rgba(212,168,83,.1);display:flex;align-items:center;justify-content:center;animation:sp 1.5s infinite}
+@keyframes sp{0%,100%{box-shadow:0 0 0 0 rgba(212,168,83,.3)}50%{box-shadow:0 0 0 24px rgba(212,168,83,0)}}
+.checkmark2{position:relative;width:32px;height:32px}
+.checkmark2::before,.checkmark2::after{content:'';position:absolute;background:#ffd700;border-radius:2px}
+.checkmark2::before{width:7px;height:18px;bottom:6px;left:6px;transform:rotate(45deg)}
+.checkmark2::after{width:20px;height:7px;bottom:17px;left:2px;transform:rotate(-45deg)}
+.success-box h3{font-size:22px;font-weight:900;letter-spacing:4px;color:#ffd700;margin-bottom:12px}
+.success-box .acc{color:#d4a853;font-weight:600}
+.success-box p{font-size:14px;color:rgba(255,255,255,.55);margin-bottom:8px;letter-spacing:1px}
+.success-box .note{font-size:12px;color:rgba(255,255,255,.25);margin-top:12px}
+.success-close{margin-top:24px;padding:10px 40px;font-size:14px;font-weight:700;letter-spacing:3px;color:#d4a853;background:transparent;border:1px solid rgba(212,168,83,.25);border-radius:24px;cursor:pointer;transition:all .3s}
+.success-close:hover{background:rgba(212,168,83,.08)}
+
+.footer-note{margin-top:80px;font-size:11px;color:rgba(255,255,255,.12);letter-spacing:3px;text-align:center;position:relative;z-index:1}
+
+/* 响应式 */
+@media(max-width:600px){
+  .compare-wrap{flex-direction:column;align-items:center}
+  .compare-card{max-width:100%}
+  .countdown{gap:10px}
+  .countdown .cd-num{font-size:28px}
+  .big-number{font-size:clamp(64px,18vw,120px)}
+  .claim-card{padding:36px 24px}
+  .nav-dots{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- 导航点 -->
+<div class="nav-dots">
+  <div class="nav-dot active" data-target="s1" title="封面"></div>
+  <div class="nav-dot" data-target="s2" title="权益"></div>
+  <div class="nav-dot" data-target="s3" title="领取"></div>
+</div>
+
+<!-- ====== 第一屏：封面 ====== -->
+<section class="section s1" id="s1">
+  <div class="s1-tag">2026 · 618 年中盛典</div>
+
+  <div class="big-number">618</div>
+
+  <h1>领航<span class="gold">升级</span>计划</h1>
+
+  <p class="sub">半年版网员 → 终身领航员</p>
+
+  <div class="countdown" id="countdown">
+    <div class="cd-item"><div class="cd-num" id="cd-d">00</div><div class="cd-label">天</div></div>
+    <div class="cd-sep">:</div>
+    <div class="cd-item"><div class="cd-num" id="cd-h">00</div><div class="cd-label">时</div></div>
+    <div class="cd-sep">:</div>
+    <div class="cd-item"><div class="cd-num" id="cd-m">00</div><div class="cd-label">分</div></div>
+    <div class="cd-sep">:</div>
+    <div class="cd-item"><div class="cd-num" id="cd-s">00</div><div class="cd-label">秒</div></div>
+  </div>
+
+  <button class="btn-go" onclick="document.getElementById('s2').scrollIntoView({behavior:'smooth'})">查 看 权 益</button>
+
+  <div class="scroll-down">▼ 向下滑动</div>
+</section>
+
+<!-- ====== 第二屏：权益对比 ====== -->
+<section class="section s2" id="s2">
+  <div class="section-title">升级<span class="gold">权益</span>对比</div>
+  <div class="section-desc">一步升级 · 终身受益</div>
+
+  <div class="compare-wrap">
+    <!-- 半年版 -->
+    <div class="compare-card old">
+      <div class="plan-name">半年版网员</div>
+      <div class="plan-price">¥ 原价</div>
+      <div class="plan-badge">当前方案</div>
+      <ul class="feature-list">
+        <li><span class="check">—</span> 盘中实战 6 个月</li>
+        <li><span class="check">—</span> 精网项目基础权限</li>
+        <li><span class="check">—</span> 到期需续费</li>
+        <li><span class="check">—</span> 无一对一私教</li>
+        <li><span class="check">—</span> 价格随行就市</li>
+      </ul>
+    </div>
+
+    <!-- 终身版 -->
+    <div class="compare-card new">
+      <div class="plan-name">终身领航员</div>
+      <div class="plan-price">¥ 立减 618</div>
+      <div class="plan-badge">618 专属</div>
+      <ul class="feature-list">
+        <li><span class="check">✓</span> 盘中实战终身回看</li>
+        <li><span class="check">✓</span> 精网项目优先体验</li>
+        <li><span class="check">✓</span> 终身有效无需续费</li>
+        <li><span class="check">✓</span> 一对一私教答疑</li>
+        <li><span class="check">✓</span> 续费价格永久锁定</li>
+      </ul>
+    </div>
+  </div>
+
+  <button class="btn-to-s3" onclick="document.getElementById('s3').scrollIntoView({behavior:'smooth'})">立即升级 · 领取福利</button>
+</section>
+
+<!-- ====== 第三屏：福利领取 ====== -->
+<section class="section s3" id="s3">
+  <div class="claim-card">
+    <h3>领取<span class="gold">618</span>升级福利</h3>
+    <p class="claim-sub">立减 618 元 · 终身领航</p>
+
+    <div class="claim-benefits">
+      <span class="claim-benefit">盘中实战终身</span>
+      <span class="claim-benefit">私教一对一</span>
+      <span class="claim-benefit">价格永久锁定</span>
+      <span class="claim-benefit">精网优先体验</span>
+    </div>
+
+    <div class="claim-input-group">
+      <input type="text" id="accountInput" placeholder="请输入您的网员账户号码" maxlength="20" autocomplete="off">
+      <div class="claim-error" id="claimError">请输入有效的账户号码</div>
+    </div>
+
+    <button class="claim-btn" id="claimBtn" onclick="handleClaim()">
+      <span class="spinner"></span>立即领取 618 升级福利
+    </button>
+  </div>
+
+  <p class="footer-note">弘历软件官方服务频道 · 活动最终解释权归频道所有</p>
+</section>
+
+<!-- 成功弹窗 -->
+<div class="overlay" id="overlay">
+  <div class="success-box">
+    <div class="success-icon"><div class="checkmark2"></div></div>
+    <h3>福利领取成功</h3>
+    <p>网员账户：<span class="acc" id="modalAccount">--</span></p>
+    <p>升级优惠：立减 ¥618</p>
+    <p class="note">客服将在 24 小时内与您联系确认升级事宜</p>
+    <button class="success-close" onclick="closeModal()">我知道了</button>
+  </div>
+</div>
+
+<script>
+// ====== 倒计时 ======
+(function(){
+  // 活动截止时间：2026年6月18日 23:59:59
+  const end = new Date('2026-06-18T23:59:59+08:00');
+  function tick(){
+    const now = new Date();
+    let diff = Math.max(0, end - now);
+    const d = Math.floor(diff/86400000); diff-=d*86400000;
+    const h = Math.floor(diff/3600000); diff-=h*3600000;
+    const m = Math.floor(diff/60000); diff-=m*60000;
+    const s = Math.floor(diff/1000);
+    document.getElementById('cd-d').textContent=String(d).padStart(2,'0');
+    document.getElementById('cd-h').textContent=String(h).padStart(2,'0');
+    document.getElementById('cd-m').textContent=String(m).padStart(2,'0');
+    document.getElementById('cd-s').textContent=String(s).padStart(2,'0');
+    if(d+h+m+s===0) document.getElementById('countdown').innerHTML='<p style="color:#ffd700;letter-spacing:4px">活动已结束</p>';
+  }
+  tick(); setInterval(tick,1000);
+})();
+
+// ====== 导航点 ======
+const dots = document.querySelectorAll('.nav-dot');
+const sections = ['s1','s2','s3'];
+const observer = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      dots.forEach(d=>d.classList.remove('active'));
+      const idx = sections.indexOf(e.target.id);
+      if(idx>=0) dots[idx].classList.add('active');
+    }
+  });
+},{threshold:.5});
+sections.forEach(id=>observer.observe(document.getElementById(id)));
+dots.forEach(d=>{d.addEventListener('click',()=>document.getElementById(d.dataset.target).scrollIntoView({behavior:'smooth'}))});
+
+// ====== 背景粒子 ======
+(function(){
+  const s1 = document.getElementById('s1');
+  for(let i=0;i<25;i++){
+    const p = document.createElement('div');
+    p.className='s1-particle';
+    const size=Math.random()*3+1;
+    p.style.width=size+'px';p.style.height=size+'px';
+    p.style.left=Math.random()*100+'%';
+    p.style.top=Math.random()*100+'%';
+    p.style.animationDuration=(Math.random()*10+8)+'s';
+    p.style.animationDelay=Math.random()*8+'s';
+    s1.appendChild(p);
+  }
+})();
+
+// ====== 福利领取 ======
+let isClaiming=false;
+function handleClaim(){
+  if(isClaiming) return;
+  const input=document.getElementById('accountInput');
+  const error=document.getElementById('claimError');
+  const btn=document.getElementById('claimBtn');
+  const account=input.value.trim();
+
+  if(!account){error.textContent='请输入您的网员账户号码';error.style.display='block';input.focus();input.style.borderColor='#ff4757';return}
+  if(account.length<3){error.textContent='账户号码长度不正确';error.style.display='block';input.focus();input.style.borderColor='#ff4757';return}
+
+  error.style.display='none';input.style.borderColor='rgba(255,255,255,.1)';
+  isClaiming=true;btn.classList.add('loading');
+  btn.innerHTML='<span class="spinner"></span>领取中...';
+
+  window.setTimeout(function(){
+    isClaiming=false;btn.classList.remove('loading');
+    btn.innerHTML='<span class="spinner"></span>立即领取 618 升级福利';
+    document.getElementById('modalAccount').textContent=account;
+    document.getElementById('overlay').classList.add('show');
+  },1200);
+}
+function closeModal(){
+  document.getElementById('overlay').classList.remove('show');
+  document.getElementById('accountInput').value='';
+}
+document.getElementById('accountInput').addEventListener('keydown',function(e){
+  if(e.key==='Enter') handleClaim();
+  if(this.style.borderColor==='rgb(255, 71, 87)'){this.style.borderColor='rgba(255,255,255,.1)';document.getElementById('claimError').style.display='none'}
+});
+document.getElementById('overlay').addEventListener('click',function(e){if(e.target===this)closeModal()});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeModal()});
+</script>
+</body>
+</html>
