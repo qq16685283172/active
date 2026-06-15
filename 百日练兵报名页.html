@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>百日练兵成长计划 — 弘历软件限时招募</title>
+<style>
+:root {
+  --bg: #fdf6ee;
+  --red: #c41e3a;
+  --gold: #d4a853;
+  --gold-light: #ffd700;
+  --dark: #1a0a0a;
+  --card-bg: #fff;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Noto Serif SC', 'STSong', 'Microsoft YaHei', serif;
+  background: var(--bg);
+  color: #2c2c2c;
+  line-height: 1.75;
+  overflow-x: hidden;
+}
+
+
+/* Section entrance animation */
+.section-fade {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity .7s ease-out, transform .7s ease-out;
+}
+.section-fade.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Hero */
+.hero {
+  text-align: center;
+  padding: clamp(50px,9vh,100px) clamp(16px,5vw,40px) clamp(40px,7vh,80px);
+  background: linear-gradient(170deg, #0d0505 0%, #1a0808 20%, #2d0f0f 50%, #1a0a14 80%, #0a0a14 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -60%; left: -60%;
+  width: 220%; height: 220%;
+  background: radial-gradient(ellipse at 50% 40%, rgba(255,215,0,.05) 0%, transparent 60%);
+  animation: heroGlow 5s ease-in-out infinite;
+}
+
+@keyframes heroGlow {
+  0%,100% { opacity:.5; transform:scale(1); }
+  50% { opacity:.9; transform:scale(1.06); }
+}
+
+.hero .tag {
+  display: inline-block;
+  background: rgba(255,215,0,.08);
+  border: 1px solid var(--gold);
+  color: var(--gold-light);
+  padding: clamp(4px,.3vw,6px) clamp(14px,2vw,24px);
+  font-size: clamp(11px,1vw,14px);
+  letter-spacing: .2em;
+  position: relative;
+  z-index: 1;
+}
+
+.hero .big-num {
+  font-size: clamp(80px,12vw,180px);
+  font-weight: 900;
+  background: linear-gradient(180deg, #ffd700 0%, #c41e3a 45%, #8b0000 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 60px rgba(196,30,58,.3));
+  line-height: 1;
+  margin: clamp(10px,1.5vh,20px) 0 clip(4px,.5vh,8px);
+  position: relative;
+  z-index: 1;
+}
+
+.hero h1 {
+  font-size: clamp(28px,4vw,56px);
+  font-weight: 900;
+  background: linear-gradient(180deg, #ffd700 25%, #d4a853 55%, #b8942e 85%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  position: relative;
+  z-index: 1;
+}
+
+.hero .h1-sub {
+  color: rgba(255,255,255,.55);
+  font-size: clamp(14px,1.3vw,18px);
+  letter-spacing: .12em;
+  margin-top: 6px;
+  position: relative;
+  z-index: 1;
+}
+
+.hero .cta-btn {
+  display: inline-block;
+  padding: clamp(14px,2vh,20px) clamp(48px,8vw,90px);
+  background: linear-gradient(135deg, #ffd700, #d4a853);
+  color: #1a0a0a;
+  font-size: clamp(16px,1.5vw,20px);
+  font-weight: 900;
+  border-radius: 50px;
+  text-decoration: none;
+  letter-spacing: .08em;
+  transition: transform .3s, box-shadow .3s;
+  position: relative;
+  z-index: 1;
+  cursor: pointer;
+}
+
+.hero .cta-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 40px rgba(255,215,0,.2);
+}
+
+.hero .urgency-line {
+  color: rgba(255,255,255,.4);
+  font-size: clamp(12px,1vw,14px);
+  margin-top: 12px;
+  position: relative;
+  z-index: 1;
+}
+
+.urgency-line span { color: var(--gold-light); font-weight: 700; }
+
+/* What you get */
+.what-you-get {
+  padding: clamp(50px,7vh,90px) clamp(16px,5vw,40px);
+  text-align: center;
+  background: var(--card-bg);
+}
+
+.what-you-get h2 {
+  font-size: clamp(22px,2.5vw,32px);
+  color: var(--red);
+  margin-bottom: clamp(8px,1vh,12px);
+}
+
+.what-you-get .section-sub {
+  font-size: clamp(14px,1.3vw,16px);
+  color: #888;
+  margin-bottom: clamp(36px,5vh,56px);
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Reward cards */
+.reward-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(clamp(240px,28vw,320px), 1fr));
+  gap: clamp(16px,2.5vw,28px);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.reward-card {
+  background: #fdf6ee;
+  border: 1px solid rgba(196,30,58,.08);
+  border-radius: 16px;
+  padding: clamp(20px,3vh,32px);
+  text-align: left;
+  transition: transform .35s, border-color .35s, box-shadow .35s;
+  position: relative;
+}
+
+.reward-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--gold);
+  box-shadow: 0 12px 40px rgba(212,168,83,.08);
+}
+
+.reward-card .rc-title {
+  font-size: clamp(16px,1.5vw,20px);
+  font-weight: 900;
+  color: var(--dark);
+  margin-bottom: 4px;
+}
+
+.reward-card .rc-cond {
+  font-size: clamp(12px,1vw,14px);
+  color: #999;
+  margin-bottom: 12px;
+}
+
+.reward-card .rc-gift {
+  font-size: clamp(13px,1.1vw,15px);
+  font-weight: 700;
+  color: var(--red);
+  margin-bottom: 14px;
+}
+
+.reward-card .rc-img {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16/10;
+  background: linear-gradient(150deg, #140808 0%, #1f0d0d 40%, #1a0d14 100%);
+  border: 1px solid rgba(212,168,83,.15);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition: border-color .4s, box-shadow .4s, transform .4s;
+}
+
+/* 光泽扫过动画 */
+.reward-card .rc-img::after {
+  content: '';
+  position: absolute;
+  top: -60%; left: -60%;
+  width: 60%; height: 220%;
+  background: linear-gradient(
+    105deg,
+    transparent 30%,
+    rgba(255,215,0,.03) 45%,
+    rgba(255,215,0,.08) 50%,
+    rgba(255,215,0,.03) 55%,
+    transparent 70%
+  );
+  transform: skewX(-20deg) translateX(-180%);
+  transition: transform 1.2s cubic-bezier(.25,.46,.45,.94);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.reward-card:hover .rc-img::after {
+  transform: skewX(-20deg) translateX(220%);
+}
+
+/* 金边呼吸 */
+.reward-card .rc-img::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 12px;
+  border: 1px solid transparent;
+  transition: border-color .5s, box-shadow .5s;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.reward-card:hover .rc-img::before {
+  border-color: rgba(212,168,83,.35);
+  box-shadow: 0 0 40px rgba(212,168,83,.08), inset 0 0 40px rgba(212,168,83,.03);
+}
+
+.reward-card:hover .rc-img {
+  border-color: rgba(212,168,83,.3);
+  box-shadow: 0 4px 30px rgba(212,168,83,.06);
+  transform: scale(1.02);
+}
+
+.rc-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0; left: 0;
+  z-index: 0;
+}
+
+/* 占位符内容区 */
+.rc-img .rc-img-inner {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.rc-img .rc-icon {
+  font-size: clamp(28px,3vw,42px);
+  opacity: .35;
+  filter: grayscale(.5);
+  transition: opacity .4s, filter .4s;
+}
+
+.reward-card:hover .rc-img .rc-icon {
+  opacity: .55;
+  filter: grayscale(0);
+}
+
+.rc-img .rc-img-label {
+  color: rgba(212,168,83,.35);
+  font-size: clamp(11px,.9vw,13px);
+  letter-spacing: .2em;
+  transition: color .4s;
+}
+
+.reward-card:hover .rc-img .rc-img-label {
+  color: rgba(212,168,83,.6);
+}
+
+/* 图片底部说明文字 */
+.rc-img .rc-desc {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: clamp(8px,1.2vh,14px) clamp(12px,2vw,20px);
+  background: linear-gradient(0deg, rgba(0,0,0,.7) 0%, transparent 100%);
+  color: rgba(255,255,255,.75);
+  font-size: clamp(11px,.85vw,13px);
+  text-align: center;
+  z-index: 3;
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity .4s, transform .4s;
+}
+
+.reward-card:hover .rc-img .rc-desc {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+/* Total value */
+.total-value {
+  margin-top: clamp(30px,5vh,50px);
+  padding: clamp(20px,3vh,36px);
+  background: linear-gradient(135deg, rgba(196,30,58,.04), rgba(212,168,83,.06));
+  border: 1px solid var(--gold);
+  border-radius: 16px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.total-value .tv-label {
+  font-size: clamp(13px,1.1vw,15px);
+  color: #888;
+  margin-bottom: 4px;
+}
+
+.total-value .tv-desc {
+  font-size: clamp(14px,1.2vw,17px);
+  font-weight: 700;
+  color: var(--dark);
+}
+
+.total-value .tv-desc strong {
+  color: var(--red);
+  font-size: 1.15em;
+}
+
+/* Section: Why join */
+.why-join {
+  padding: clamp(50px,7vh,90px) clamp(16px,5vw,40px);
+  background: var(--bg);
+  text-align: center;
+}
+
+.why-join h2 {
+  font-size: clamp(22px,2.5vw,32px);
+  color: var(--red);
+  margin-bottom: clamp(30px,5vh,50px);
+}
+
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(clamp(200px,20vw,260px), 1fr));
+  gap: clamp(16px,2vw,24px);
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.why-item {
+  background: var(--card-bg);
+  border: 1px solid rgba(196,30,58,.06);
+  border-radius: 14px;
+  padding: clamp(24px,3.5vh,40px) clamp(16px,2.5vw,28px);
+  transition: transform .3s;
+}
+
+.why-item:hover { transform: translateY(-3px); }
+
+.why-item .why-icon {
+  font-size: clamp(28px,3vw,40px);
+  margin-bottom: 10px;
+}
+
+.why-item .why-title {
+  font-size: clamp(14px,1.3vw,17px);
+  font-weight: 900;
+  color: var(--dark);
+  margin-bottom: 6px;
+}
+
+.why-item .why-desc {
+  font-size: clamp(12px,1vw,14px);
+  color: #888;
+}
+
+/* Signup */
+.signup {
+  padding: clamp(50px,7vh,90px) clamp(16px,5vw,40px);
+  background: linear-gradient(180deg, #1a0a0a 0%, #2d1010 30%, #1a0a14 60%, #0a0a14 100%);
+  text-align: center;
+  color: #fff;
+}
+
+.signup h2 {
+  font-size: clamp(22px,2.5vw,32px);
+  color: var(--gold-light);
+  margin-bottom: clamp(6px,.8vh,10px);
+}
+
+.signup .su-sub {
+  font-size: clamp(14px,1.3vw,16px);
+  color: rgba(255,255,255,.45);
+  margin-bottom: clamp(24px,4vh,40px);
+}
+
+.signup-card {
+  max-width: 480px;
+  margin: 0 auto;
+  background: transparent;
+  border: none;
+  border-radius: 12px;
+  padding: 0;
+  text-align: left;
+  overflow: hidden;
+}
+
+.su-tip {
+  text-align: center;
+  font-size: clamp(12px,.9vw,13px);
+  color: rgba(255,255,255,.5);
+  margin-bottom: 12px;
+}
+
+.feishu-iframe {
+  width: 100%;
+  min-height: 380px;
+  border-radius: 10px;
+  background: #fff;
+}
+
+.su-count {
+  text-align: center;
+  margin-top: 14px;
+  font-size: clamp(12px,.9vw,13px);
+  color: rgba(255,255,255,.3);
+}
+
+.signup-card .su-count strong { color: var(--gold-light); }
+
+/* Trust strip */
+.trust-strip {
+  padding: clamp(20px,3vh,30px);
+  background: var(--card-bg);
+  text-align: center;
+  border-top: 1px solid rgba(196,30,58,.05);
+}
+
+.trust-strip .ts-text {
+  font-size: clamp(12px,1vw,14px);
+  color: #aaa;
+  letter-spacing: .1em;
+}
+
+/* Footer */
+.footer {
+  padding: clamp(20px,3vh,30px);
+  background: var(--card-bg);
+  text-align: center;
+  font-size: clamp(11px,.85vw,13px);
+  color: #bbb;
+  border-top: 1px solid rgba(196,30,58,.04);
+}
+
+    </style>
+</head>
+<body>
+
+<!-- Hero -->
+<section class="hero">
+    <div class="tag">弘历软件 · 官方服务频道</div>
+    <div class="big-num">100</div>
+    <h1>百日练兵成长计划</h1>
+    <p class="h1-sub">久学精进 · 久学贯通 · 久学破壁 · 久学致用 · 久学薄发</p>
+    <div class="cta-btn" onclick="scrollToRewards()">查看成长好礼</div>
+    <p class="urgency-line">限时招募 · 仅剩 <span>37</span> 个名额</p>
+</section>
+
+<!-- What you get -->
+<section class="what-you-get section-fade" id="rewards">
+    <h2>六重大礼 · 成长相伴</h2>
+    <p class="section-sub">参与百日练兵，解锁层层好礼，每一步成长都有回报</p>
+    
+    <div class="reward-list">
+        <div class="reward-card">
+            <div class="rc-title">逃顶实战手册</div>
+            <div class="rc-cond">跟随学习，逐步解锁</div>
+            <div class="rc-gift">逃顶实战手册</div>
+            <div class="rc-img">
+                <img src="逃顶实战手册.png" alt="逃顶实战手册">
+                <div class="rc-desc">精准逃顶 · 实战为王</div>
+            </div>
+        </div>
+        <div class="reward-card">
+            <div class="rc-title">领航进阶宝典</div>
+            <div class="rc-cond">跟随学习，逐步解锁</div>
+            <div class="rc-gift">领航进阶宝典</div>
+            <div class="rc-img">
+                <img src="领航进阶宝典.png" alt="领航进阶宝典">
+                <div class="rc-desc">进阶之路 · 宝典领航</div>
+            </div>
+        </div>
+        <div class="reward-card">
+            <div class="rc-title">财经壹眼体验课</div>
+            <div class="rc-cond">跟随学习，逐步解锁</div>
+            <div class="rc-gift">财经壹眼体验课</div>
+            <div class="rc-img">
+                <img src="财经壹眼体验课.png" alt="财经壹眼体验课">
+                <div class="rc-desc">壹眼看透 · 财经脉络</div>
+            </div>
+        </div>
+        <div class="reward-card">
+            <div class="rc-title">龙虾3.0系统</div>
+            <div class="rc-cond">跟随学习，逐步解锁</div>
+            <div class="rc-gift">龙虾3.0系统</div>
+            <div class="rc-img">
+                <img src="龙虾3.0系统.jpg" alt="龙虾3.0系统">
+                <div class="rc-desc">龙虾系统 · 量化利器</div>
+            </div>
+        </div>
+        <div class="reward-card">
+            <div class="rc-title">特训营入场券</div>
+            <div class="rc-cond">跟随学习，逐步解锁</div>
+            <div class="rc-gift">特训营入场券</div>
+            <div class="rc-img">
+                <img src="特训营入场券.png" alt="特训营入场券">
+                <div class="rc-desc">特训淬炼 · 破茧成蝶</div>
+            </div>
+        </div>
+        <div class="reward-card">
+            <div class="rc-title">顶级游资实战宝典</div>
+            <div class="rc-cond">跟随学习，逐步解锁</div>
+            <div class="rc-gift">顶级游资实战宝典</div>
+            <div class="rc-img">
+                <img src="顶级游资实战宝典.png" alt="顶级游资实战宝典">
+                <div class="rc-desc">游资心法 · 巅峰实战</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="total-value">
+        <div class="tv-label">六重大礼总价值</div>
+        <div class="tv-desc">超过 <strong>&yen;3,980</strong> 的成长礼包 · 免费解锁</div>
+    </div>
+</section>
+
+<!-- Why join -->
+<section class="why-join section-fade">
+    <h2>为什么加入百日练兵</h2>
+    <div class="why-grid">
+        <div class="why-item">
+            <div class="why-icon">&#x1F3AF;</div>
+            <div class="why-title">系统化学习路径</div>
+            <div class="why-desc">从入门到精通，100天搭建完整交易体系</div>
+        </div>
+        <div class="why-item">
+            <div class="why-icon">&#x1F465;</div>
+            <div class="why-title">实战圈子交流</div>
+            <div class="why-desc">与千名网员共学共进，交流实战心得</div>
+        </div>
+        <div class="why-item">
+            <div class="why-icon">&#x1F3C6;</div>
+            <div class="why-title">阶梯激励反馈</div>
+            <div class="why-desc">每阶段解锁新权益，成长看得见</div>
+        </div>
+        <div class="why-item">
+            <div class="why-icon">&#x1F4C8;</div>
+            <div class="why-title">专业工具加持</div>
+            <div class="why-desc">弘历软件全系工具，为学习保驾护航</div>
+        </div>
+    </div>
+</section>
+
+<!-- Signup -->
+<section class="signup section-fade" id="signup">
+    <h2>立即报名</h2>
+    <p class="su-sub">抢占名额，开启百日成长之旅</p>
+    <p class="su-tip">精网号为 8 位数字，请准确填写</p>
+    <div class="signup-card">
+        <iframe
+            src="https://si6lvzn46p9.feishu.cn/share/base/form/shrcnnefmDHJHRp09L7L1JXKezd"
+            frameborder="0"
+            scrolling="no"
+            class="feishu-iframe"
+        ></iframe>
+        <div class="su-count">已有 <strong>1,283</strong> 位网员加入</div>
+    </div>
+</section>
+
+<!-- Trust strip -->
+<div class="trust-strip">
+    <div class="ts-text">弘历软件官方服务频道 · 久学精进 久学贯通 久学破壁 久学致用 久学薄发</div>
+</div>
+
+<footer class="footer">
+    弘历软件官方服务频道 · 百日练兵成长计划
+</footer>
+
+<script>
+
+// Section entrance animation
+(function() {
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.section-fade').forEach(function(el) { observer.observe(el); });
+})();
+
+function scrollToRewards() {
+  document.getElementById('rewards').scrollIntoView({ behavior: 'smooth' });
+}
+
+
+</script>
+</body>
+</html>

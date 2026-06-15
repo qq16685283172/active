@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>618 领航升级计划 - 福利领取</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Microsoft YaHei', 'PingFang SC', sans-serif;
+            background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 40%, #0d1137 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow: hidden;
+        }
+
+        /* 背景粒子 */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .particle {
+            position: absolute;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.4) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 8s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) translateX(0) scale(1); opacity: 0; }
+            10% { opacity: 0.8; }
+            50% { transform: translateY(-120px) translateX(40px) scale(1.5); opacity: 0.4; }
+            90% { opacity: 0.1; }
+        }
+
+        /* 主容器 */
+        .container {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 480px;
+        }
+
+        /* 卡片 */
+        .card {
+            background: linear-gradient(145deg, rgba(20, 24, 50, 0.95), rgba(15, 18, 40, 0.98));
+            border: 1px solid rgba(255, 215, 0, 0.15);
+            border-radius: 20px;
+            padding: 48px 36px 40px;
+            text-align: center;
+            box-shadow:
+                0 0 60px rgba(255, 215, 0, 0.06),
+                0 20px 60px rgba(0, 0, 0, 0.5),
+                inset 0 1px 0 rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* 卡片顶部光晕 */
+        .card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(ellipse at 30% 20%, rgba(255, 215, 0, 0.04) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        /* 顶部标签 */
+        .tag {
+            display: inline-block;
+            background: linear-gradient(135deg, #ffd700, #ffaa00);
+            color: #1a1f3a;
+            font-size: 13px;
+            font-weight: 700;
+            padding: 5px 18px;
+            border-radius: 20px;
+            letter-spacing: 2px;
+            margin-bottom: 28px;
+        }
+
+        /* 标题 */
+        .title {
+            font-size: 28px;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+        }
+
+        .title .gold {
+            background: linear-gradient(135deg, #ffd700, #ffaa00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.5);
+            margin-bottom: 36px;
+            letter-spacing: 1px;
+        }
+
+        /* 权益展示 */
+        .benefits {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-bottom: 32px;
+            flex-wrap: wrap;
+        }
+
+        .benefit-item {
+            background: rgba(255, 215, 0, 0.05);
+            border: 1px solid rgba(255, 215, 0, 0.1);
+            border-radius: 12px;
+            padding: 14px 16px;
+            min-width: 80px;
+            transition: all 0.3s;
+        }
+
+        .benefit-item:hover {
+            border-color: rgba(255, 215, 0, 0.3);
+            background: rgba(255, 215, 0, 0.08);
+        }
+
+        .benefit-item .icon {
+            font-size: 22px;
+            margin-bottom: 6px;
+        }
+
+        .benefit-item .text {
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.6);
+            line-height: 1.4;
+        }
+
+        /* 输入组 */
+        .input-group {
+            position: relative;
+            margin-bottom: 10px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 16px 20px;
+            font-size: 16px;
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 12px;
+            outline: none;
+            transition: all 0.3s;
+            letter-spacing: 1px;
+            text-align: center;
+        }
+
+        .input-group input::placeholder {
+            color: rgba(255, 255, 255, 0.25);
+            letter-spacing: 1px;
+        }
+
+        .input-group input:focus {
+            border-color: #ffd700;
+            background: rgba(255, 215, 0, 0.04);
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.08);
+        }
+
+        .input-group .error-tip {
+            font-size: 12px;
+            color: #ff4757;
+            margin-top: 8px;
+            display: none;
+            letter-spacing: 1px;
+        }
+
+        /* 按钮 */
+        .btn {
+            width: 100%;
+            padding: 16px;
+            font-size: 17px;
+            font-weight: 700;
+            color: #1a1f3a;
+            background: linear-gradient(135deg, #ffd700, #ffaa00);
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            letter-spacing: 2px;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            margin-top: 16px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px rgba(255, 215, 0, 0.25);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.15);
+        }
+
+        .btn.loading {
+            pointer-events: none;
+            opacity: 0.7;
+        }
+
+        .btn .spinner {
+            display: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid transparent;
+            border-top-color: #1a1f3a;
+            border-radius: 50%;
+            animation: spin 0.6s linear infinite;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+
+        .btn.loading .spinner {
+            display: inline-block;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* 成功弹窗 */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 100;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(4px);
+        }
+
+        .overlay.show {
+            display: flex;
+        }
+
+        .success-modal {
+            background: linear-gradient(145deg, rgba(20, 24, 50, 0.98), rgba(15, 18, 40, 0.98));
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 20px;
+            padding: 48px 36px 36px;
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            box-shadow: 0 0 80px rgba(255, 215, 0, 0.1), 0 20px 60px rgba(0, 0, 0, 0.6);
+            animation: modalIn 0.4s ease-out;
+        }
+
+        @keyframes modalIn {
+            from {
+                opacity: 0;
+                transform: scale(0.85) translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 24px;
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.15), rgba(255, 170, 0, 0.1));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.4); }
+            50% { box-shadow: 0 0 0 20px rgba(255, 215, 0, 0); }
+        }
+
+        .checkmark {
+            width: 36px;
+            height: 36px;
+            position: relative;
+        }
+
+        .checkmark::before,
+        .checkmark::after {
+            content: '';
+            position: absolute;
+            background: #ffd700;
+            border-radius: 2px;
+        }
+
+        .checkmark::before {
+            width: 8px;
+            height: 20px;
+            bottom: 6px;
+            left: 6px;
+            transform: rotate(45deg);
+        }
+
+        .checkmark::after {
+            width: 22px;
+            height: 8px;
+            bottom: 18px;
+            left: 3px;
+            transform: rotate(-45deg);
+        }
+
+        .success-title {
+            font-size: 24px;
+            font-weight: 800;
+            color: #ffd700;
+            margin-bottom: 12px;
+            letter-spacing: 2px;
+        }
+
+        .success-detail {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.65);
+            margin-bottom: 10px;
+            line-height: 1.8;
+        }
+
+        .success-detail .account {
+            color: #ffd700;
+            font-weight: 600;
+        }
+
+        .success-detail .amount {
+            color: #ffd700;
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        .modal-btn {
+            margin-top: 28px;
+            padding: 12px 48px;
+            font-size: 14px;
+            font-weight: 700;
+            color: #ffd700;
+            background: transparent;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 25px;
+            cursor: pointer;
+            letter-spacing: 2px;
+            transition: all 0.3s;
+        }
+
+        .modal-btn:hover {
+            background: rgba(255, 215, 0, 0.1);
+            border-color: rgba(255, 215, 0, 0.6);
+        }
+
+        /* 底部标注 */
+        .footer-note {
+            margin-top: 24px;
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.25);
+            letter-spacing: 1px;
+        }
+
+        /* 响应式 */
+        @media (max-width: 480px) {
+            .card {
+                padding: 36px 24px 32px;
+            }
+            .title {
+                font-size: 24px;
+            }
+            .benefits {
+                gap: 10px;
+            }
+            .benefit-item {
+                min-width: 65px;
+                padding: 10px 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 背景粒子 -->
+    <div class="particles" id="particles"></div>
+
+    <!-- 主容器 -->
+    <div class="container">
+        <div class="card">
+            <div class="tag">618 领航升级</div>
+            <div class="title">
+                终身<span class="gold">领航员</span>
+            </div>
+            <div class="subtitle">半年版网员专属升级通道</div>
+
+            <!-- 权益展示 -->
+            <div class="benefits">
+                <div class="benefit-item">
+                    <div class="icon">📖</div>
+                    <div class="text">盘中实战<br>终身回看</div>
+                </div>
+                <div class="benefit-item">
+                    <div class="icon">🎯</div>
+                    <div class="text">一对一<br>私教答疑</div>
+                </div>
+                <div class="benefit-item">
+                    <div class="icon">🔒</div>
+                    <div class="text">续费价格<br>永久锁定</div>
+                </div>
+                <div class="benefit-item">
+                    <div class="icon">⚡</div>
+                    <div class="text">精网项目<br>优先体验</div>
+                </div>
+            </div>
+
+            <!-- 输入区域 -->
+            <div class="input-group">
+                <input
+                    type="text"
+                    id="accountInput"
+                    placeholder="请输入您的网员账户号码"
+                    maxlength="20"
+                    autocomplete="off"
+                >
+                <div class="error-tip" id="errorTip">请输入有效的账户号码</div>
+            </div>
+
+            <!-- 领取按钮 -->
+            <button class="btn" id="claimBtn" onclick="handleClaim()">
+                <span class="spinner"></span>
+                立即领取 618 升级福利
+            </button>
+
+            <div class="footer-note">弘历软件官方服务频道 · 活动最终解释权归频道所有</div>
+        </div>
+    </div>
+
+    <!-- 成功弹窗 -->
+    <div class="overlay" id="overlay">
+        <div class="success-modal">
+            <div class="success-icon">
+                <div class="checkmark"></div>
+            </div>
+            <div class="success-title">福利领取成功</div>
+            <div class="success-detail">
+                网员账户：<span class="account" id="modalAccount">--</span><br>
+                升级优惠：立减 <span class="amount">¥618</span><br>
+                权益已发放至您的账户
+            </div>
+            <div class="success-detail" style="margin-top:8px; font-size:12px; color:rgba(255,255,255,0.4);">
+                客服将在 24 小时内与您联系确认升级事宜
+            </div>
+            <button class="modal-btn" onclick="closeModal()">我知道了</button>
+        </div>
+    </div>
+
+    <script>
+        // 背景粒子生成
+        (function createParticles() {
+            const container = document.getElementById('particles');
+            const count = 30;
+            for (let i = 0; i < count; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                const size = Math.random() * 6 + 2;
+                particle.style.width = size + 'px';
+                particle.style.height = size + 'px';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 8 + 's';
+                particle.style.animationDuration = (Math.random() * 6 + 6) + 's';
+                container.appendChild(particle);
+            }
+        })();
+
+        // 防重复提交
+        let isClaiming = false;
+
+        function handleClaim() {
+            if (isClaiming) return;
+
+            const input = document.getElementById('accountInput');
+            const errorTip = document.getElementById('errorTip');
+            const btn = document.getElementById('claimBtn');
+            const account = input.value.trim();
+
+            // 校验
+            if (!account) {
+                errorTip.textContent = '请输入您的网员账户号码';
+                errorTip.style.display = 'block';
+                input.focus();
+                input.style.borderColor = '#ff4757';
+                return;
+            }
+
+            if (account.length < 3) {
+                errorTip.textContent = '账户号码长度不正确，请检查后重新输入';
+                errorTip.style.display = 'block';
+                input.focus();
+                input.style.borderColor = '#ff4757';
+                return;
+            }
+
+            // 隐藏错误提示
+            errorTip.style.display = 'none';
+            input.style.borderColor = 'rgba(255,255,255,0.12)';
+
+            // 进入加载状态
+            isClaiming = true;
+            btn.classList.add('loading');
+            btn.innerHTML = '<span class="spinner"></span>领取中...';
+
+            // 模拟请求（1.2 秒后显示成功）
+            window.setTimeout(function() {
+                isClaiming = false;
+                btn.classList.remove('loading');
+                btn.innerHTML = '立即领取 618 升级福利';
+
+                document.getElementById('modalAccount').textContent = account;
+                document.getElementById('overlay').classList.add('show');
+            }, 1200);
+        }
+
+        function closeModal() {
+            document.getElementById('overlay').classList.remove('show');
+            document.getElementById('accountInput').value = '';
+        }
+
+        // 回车键触发
+        document.getElementById('accountInput').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                handleClaim();
+            }
+            // 输入时清除错误状态
+            if (this.style.borderColor === 'rgb(255, 71, 87)') {
+                this.style.borderColor = 'rgba(255,255,255,0.12)';
+                document.getElementById('errorTip').style.display = 'none';
+            }
+        });
+
+        // 点击遮罩关闭
+        document.getElementById('overlay').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        // ESC 关闭
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+    </script>
+
+</body>
+</html>
