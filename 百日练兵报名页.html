@@ -12,6 +12,7 @@
   --gold-light: #ffd700;
   --dark: #1a0a0a;
   --card-bg: #fff;
+  --primary: #c41e3a;
 }
 
 * { margin:0; padding:0; box-sizing:border-box; }
@@ -452,14 +453,306 @@ body {
   background: #fff;
 }
 
-.su-count {
+.milestone {
   text-align: center;
-  margin-top: 14px;
-  font-size: clamp(12px,.9vw,13px);
-  color: rgba(255,255,255,.3);
+  margin-top: clamp(28px,4vh,40px);
+  padding: clamp(24px,3vw,32px);
+  background: linear-gradient(135deg, rgba(196,30,58,.12), rgba(196,30,58,.04));
+  border: 1px solid rgba(196,30,58,.18);
+  border-radius: 12px;
 }
 
-.signup-card .su-count strong { color: var(--gold-light); }
+.ms-icon {
+  font-size: clamp(30px,3vw,40px);
+  margin-bottom: 8px;
+}
+
+.ms-title {
+  font-size: clamp(17px,1.6vw,22px);
+  font-weight: 700;
+  color: var(--gold-light);
+  letter-spacing: .04em;
+  margin-bottom: 6px;
+}
+
+.ms-desc {
+  font-size: clamp(13px,1.1vw,15px);
+  color: rgba(255,255,255,.55);
+  margin-bottom: 18px;
+}
+
+.ms-download {
+  display: inline-block;
+  padding: clamp(10px,1.2vw,14px) clamp(24px,2.5vw,36px);
+  background: linear-gradient(135deg, var(--primary), #a3162a);
+  color: #fff;
+  font-size: clamp(14px,1.1vw,16px);
+  font-weight: 600;
+  border-radius: 8px;
+  text-decoration: none;
+  letter-spacing: .04em;
+  transition: all .3s;
+}
+
+.ms-download:hover {
+  background: linear-gradient(135deg, #d6283a, var(--primary));
+  box-shadow: 0 0 24px rgba(196,30,58,.35);
+  transform: translateY(-2px);
+}
+
+/* 选项按钮区 */
+.signup-options {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: clamp(12px,2vw,20px);
+  margin-bottom: clamp(20px,3vh,32px);
+}
+
+.su-btn {
+  padding: clamp(12px,1.8vh,18px) clamp(28px,4vw,48px);
+  font-size: clamp(15px,1.3vw,18px);
+  font-weight: 700;
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+  letter-spacing: .05em;
+  transition: transform .3s, box-shadow .3s;
+}
+
+.su-btn:hover {
+  transform: translateY(-3px);
+}
+
+.su-btn-yes {
+  background: linear-gradient(135deg, #ffd700, #d4a853);
+  color: #1a0a0a;
+  box-shadow: 0 4px 24px rgba(255,215,0,.15);
+}
+
+.su-btn-yes:hover {
+  box-shadow: 0 8px 36px rgba(255,215,0,.3);
+}
+
+.su-btn-no {
+  background: transparent;
+  color: var(--gold-light);
+  border: 2px solid rgba(212,168,83,.4);
+}
+
+.su-btn-no:hover {
+  border-color: var(--gold-light);
+  box-shadow: 0 4px 20px rgba(212,168,83,.15);
+}
+
+/* 精网号填写区 */
+.jingwang-form {
+  max-width: 420px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.jw-input {
+  width: 100%;
+  padding: clamp(12px,1.5vh,16px) clamp(16px,2vw,24px);
+  font-size: clamp(16px,1.4vw,20px);
+  text-align: center;
+  letter-spacing: .3em;
+  background: rgba(255,255,255,.06);
+  border: 2px solid rgba(212,168,83,.25);
+  border-radius: 12px;
+  color: #fff;
+  outline: none;
+  transition: border-color .3s, box-shadow .3s;
+  margin-bottom: 14px;
+}
+
+.jw-input:focus {
+  border-color: var(--gold-light);
+  box-shadow: 0 0 20px rgba(212,168,83,.12);
+}
+
+.jw-input::placeholder {
+  color: rgba(255,255,255,.25);
+  letter-spacing: .08em;
+}
+
+.jw-submit {
+  display: inline-block;
+  padding: clamp(10px,1.4vh,14px) clamp(32px,5vw,52px);
+  background: linear-gradient(135deg, var(--primary), #a3162a);
+  color: #fff;
+  font-size: clamp(15px,1.2vw,18px);
+  font-weight: 700;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  letter-spacing: .06em;
+  transition: transform .3s, box-shadow .3s;
+}
+
+.jw-submit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 24px rgba(196,30,58,.35);
+}
+
+.jw-error {
+  color: #ff6b6b;
+  font-size: clamp(12px,.9vw,14px);
+  margin-top: 10px;
+  min-height: 20px;
+}
+
+/* 报名记录面板 */
+.entries-panel {
+  max-width: 500px;
+  margin: clamp(20px,3vh,32px) auto 0;
+  text-align: center;
+}
+
+.ep-title {
+  font-size: clamp(13px,1vw,15px);
+  color: rgba(255,255,255,.5);
+  margin-bottom: 12px;
+}
+
+.ep-table-wrap {
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(212,168,83,.12);
+  border-radius: 10px;
+  padding: clamp(12px,2vw,20px);
+  overflow-x: auto;
+  margin-bottom: 14px;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.ep-table-wrap table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: clamp(12px,.9vw,14px);
+  color: rgba(255,255,255,.7);
+}
+
+.ep-table-wrap th,
+.ep-table-wrap td {
+  padding: 8px 12px;
+  text-align: center;
+  border-bottom: 1px solid rgba(212,168,83,.08);
+}
+
+.ep-table-wrap th {
+  color: var(--gold-light);
+  font-weight: 700;
+}
+
+.export-btn {
+  display: inline-block;
+  padding: clamp(8px,1vh,12px) clamp(20px,3vw,32px);
+  background: linear-gradient(135deg, #217346, #185a2d);
+  color: #fff;
+  font-size: clamp(13px,1vw,15px);
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  letter-spacing: .04em;
+  transition: transform .3s, box-shadow .3s;
+}
+
+.export-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(33,115,70,.3);
+}
+
+/* 管理员入口 */
+.admin-trigger {
+  margin-left: 8px;
+  cursor: pointer;
+  opacity: .25;
+  transition: opacity .3s;
+  font-size: 12px;
+  vertical-align: middle;
+}
+
+.admin-trigger:hover { opacity: .6; }
+
+.admin-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.admin-modal-inner {
+  background: #1e1e1e;
+  border: 1px solid rgba(212,168,83,.2);
+  border-radius: 16px;
+  padding: clamp(24px,4vw,36px);
+  width: min(360px, 90vw);
+  text-align: center;
+}
+
+.am-title {
+  font-size: clamp(16px,1.4vw,18px);
+  color: var(--gold-light);
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.am-input {
+  width: 100%;
+  padding: clamp(10px,1.3vh,14px) 16px;
+  font-size: clamp(14px,1.1vw,16px);
+  text-align: center;
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(212,168,83,.3);
+  border-radius: 10px;
+  color: #fff;
+  outline: none;
+  margin-bottom: 16px;
+  transition: border-color .3s;
+}
+
+.am-input:focus { border-color: var(--gold-light); }
+
+.am-btns {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-bottom: 8px;
+}
+
+.am-btn {
+  padding: 8px 28px;
+  border-radius: 8px;
+  font-size: clamp(13px,1vw,15px);
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: transform .2s;
+}
+
+.am-btn:hover { transform: translateY(-1px); }
+
+.am-btn-cancel {
+  background: rgba(255,255,255,.08);
+  color: rgba(255,255,255,.6);
+}
+
+.am-btn-ok {
+  background: linear-gradient(135deg, var(--primary), #a3162a);
+  color: #fff;
+}
+
+.am-error {
+  font-size: 12px;
+  color: #ff6b6b;
+  min-height: 16px;
+}
 
 /* Trust strip */
 .trust-strip {
@@ -486,6 +779,7 @@ body {
 }
 
     </style>
+<script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js"></script>
 </head>
 <body>
 
@@ -569,7 +863,7 @@ body {
         <div class="why-item">
             <div class="why-icon">&#x1F3AF;</div>
             <div class="why-title">系统化学习路径</div>
-            <div class="why-desc">从入门到精通，100天搭建完整交易体系</div>
+            <div class="why-desc">从入门到精通，用百日见证你的成长</div>
         </div>
         <div class="why-item">
             <div class="why-icon">&#x1F465;</div>
@@ -593,14 +887,32 @@ body {
 <section class="signup section-fade" id="signup">
     <h2>立即报名</h2>
     <p class="su-sub">抢占名额，开启百日成长之旅</p>
-    <p class="su-tip">精网号为 8 位数字，请准确填写</p>
-    <div class="signup-card">
-        <iframe
-            src="https://si6lvzn46p9.feishu.cn/share/base/form/shrcnnefmDHJHRp09L7L1JXKezd"
-            frameborder="0"
-            scrolling="no"
-            class="feishu-iframe"
-        ></iframe>
+    <!-- 选项区域 -->
+    <div class="signup-options" id="signupOptions">
+        <button class="su-btn su-btn-yes" onclick="handleAlreadySignedUp()">我已报名，直接下载资料</button>
+        <button class="su-btn su-btn-no" onclick="handleWantToSignUp()">我要报名</button>
+    </div>
+    <!-- 精网号填写区域（默认隐藏） -->
+    <div class="jingwang-form" id="jingwangForm" style="display:none;">
+        <p class="su-tip">精网号为 8 位数字，请准确填写</p>
+        <input type="text" class="jw-input" id="jwInput" placeholder="请输入 8 位精网号" maxlength="8" inputmode="numeric" pattern="[0-9]{8}">
+        <button class="jw-submit" onclick="submitJingWang()">提交报名</button>
+        <p class="jw-error" id="jwError"></p>
+    </div>
+    <!-- 报名成功里程碑（默认隐藏） -->
+    <div class="milestone" id="milestoneBlock" style="display:none;">
+        <div class="ms-icon">&#x1F389;</div>
+        <div class="ms-title">恭喜你解锁里程碑「新人报道」</div>
+        <div class="ms-desc">成功参与百日炼兵计划</div>
+        <a class="ms-download" href="逃顶实战手册.pdf" download>
+            &#x1F4E5; 下载逃顶实战手册（PDF）
+        </a>
+    </div>
+    <!-- 报名统计面板（默认隐藏） -->
+    <div class="entries-panel" id="entriesPanel" style="display:none;">
+        <p class="ep-title">已收集的报名记录</p>
+        <div class="ep-table-wrap" id="epTable"></div>
+        <button class="export-btn" onclick="exportExcel()">导出 Excel 统计表</button>
     </div>
 </section>
 
@@ -611,7 +923,21 @@ body {
 
 <footer class="footer">
     弘历软件官方服务频道 · 百日练兵成长计划
+    <span class="admin-trigger" id="adminTrigger">&#x1F512;</span>
 </footer>
+
+<!-- 管理员密码弹层 -->
+<div class="admin-modal" id="adminModal" style="display:none;">
+    <div class="admin-modal-inner">
+        <p class="am-title">管理员验证</p>
+        <input type="password" class="am-input" id="amPassword" placeholder="请输入管理员密码">
+        <div class="am-btns">
+            <button class="am-btn am-btn-cancel" onclick="closeAdmin()">取消</button>
+            <button class="am-btn am-btn-ok" onclick="verifyAdmin()">确认</button>
+        </div>
+        <p class="am-error" id="amError"></p>
+    </div>
+</div>
 
 <script>
 
@@ -632,6 +958,123 @@ function scrollToRewards() {
   document.getElementById('rewards').scrollIntoView({ behavior: 'smooth' });
 }
 
+// ========== 报名逻辑 ==========
+var STORAGE_KEY = 'baibing_signup_entries';
+var ADMIN_KEY = 'baibing_admin_verified';
+
+function getEntries() {
+  try {
+    return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+  } catch(e) { return []; }
+}
+
+function saveEntry(jingwang) {
+  var entries = getEntries();
+  entries.push({ 精网号: jingwang, 报名时间: new Date().toLocaleString('zh-CN') });
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(entries));
+  return entries;
+}
+
+function renderEntriesTable(entries) {
+  var table = document.getElementById('epTable');
+  if (!entries.length) { table.innerHTML = ''; return; }
+  var html = '<table><thead><tr><th>#</th><th>精网号</th><th>报名时间</th></tr></thead><tbody>';
+  entries.forEach(function(e, i) {
+    html += '<tr><td>' + (i + 1) + '</td><td>' + e.精网号 + '</td><td>' + e.报名时间 + '</td></tr>';
+  });
+  html += '</tbody></table>';
+  table.innerHTML = html;
+}
+
+function handleAlreadySignedUp() {
+  document.getElementById('signupOptions').style.display = 'none';
+  document.getElementById('jingwangForm').style.display = 'none';
+  document.getElementById('milestoneBlock').style.display = 'block';
+  document.getElementById('entriesPanel').style.display = 'none';
+  document.getElementById('milestoneBlock').scrollIntoView({ behavior: 'smooth' });
+}
+
+function handleWantToSignUp() {
+  document.getElementById('signupOptions').style.display = 'none';
+  document.getElementById('jingwangForm').style.display = 'block';
+  document.getElementById('milestoneBlock').style.display = 'none';
+  document.getElementById('entriesPanel').style.display = 'none';
+  document.getElementById('jwInput').focus();
+}
+
+function submitJingWang() {
+  var input = document.getElementById('jwInput');
+  var error = document.getElementById('jwError');
+  var val = input.value.trim();
+
+  if (!val) { error.textContent = '请输入精网号'; return; }
+  if (!/^\d{8}$/.test(val)) { error.textContent = '精网号必须为 8 位数字'; return; }
+
+  error.textContent = '';
+  saveEntry(val);
+  document.getElementById('jingwangForm').style.display = 'none';
+  document.getElementById('milestoneBlock').style.display = 'block';
+  // 只有管理员登录后才显示统计面板
+  if (localStorage.getItem(ADMIN_KEY) === '1') {
+    renderEntriesTable(getEntries());
+    document.getElementById('entriesPanel').style.display = 'block';
+  }
+  document.getElementById('milestoneBlock').scrollIntoView({ behavior: 'smooth' });
+}
+
+function exportExcel() {
+  var entries = getEntries();
+  if (!entries.length) { alert('暂无报名记录可导出'); return; }
+
+  var data = entries.map(function(e) { return { 精网号: e.精网号, 报名时间: e.报名时间 }; });
+  var ws = XLSX.utils.json_to_sheet(data);
+  ws['!cols'] = [{ wch: 14 }, { wch: 24 }];
+  var wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, '报名统计');
+  XLSX.writeFile(wb, '百日练兵报名统计.xlsx');
+}
+
+// ========== 管理员验证 ==========
+var ADMIN_PWD_HASH = 'aG9uZ2xpMTAw'; // base64, 默认密码 hongli100
+
+document.getElementById('adminTrigger').addEventListener('click', function() {
+  if (localStorage.getItem(ADMIN_KEY) === '1') {
+    // 已是管理员：直接展示面板
+    renderEntriesTable(getEntries());
+    document.getElementById('entriesPanel').style.display = 'block';
+    document.getElementById('entriesPanel').scrollIntoView({ behavior: 'smooth' });
+  } else {
+    document.getElementById('adminModal').style.display = 'flex';
+    document.getElementById('amPassword').value = '';
+    document.getElementById('amError').textContent = '';
+    document.getElementById('amPassword').focus();
+  }
+});
+
+function closeAdmin() {
+  document.getElementById('adminModal').style.display = 'none';
+}
+
+function verifyAdmin() {
+  var pwd = document.getElementById('amPassword').value;
+  if (atob(ADMIN_PWD_HASH) === pwd) {
+    localStorage.setItem(ADMIN_KEY, '1');
+    document.getElementById('adminModal').style.display = 'none';
+    renderEntriesTable(getEntries());
+    document.getElementById('entriesPanel').style.display = 'block';
+    document.getElementById('entriesPanel').scrollIntoView({ behavior: 'smooth' });
+  } else {
+    document.getElementById('amError').textContent = '密码错误';
+  }
+}
+
+// 页面加载：恢复管理员状态
+(function() {
+  if (localStorage.getItem(ADMIN_KEY) === '1') {
+    renderEntriesTable(getEntries());
+    document.getElementById('entriesPanel').style.display = 'block';
+  }
+})();
 
 </script>
 </body>
