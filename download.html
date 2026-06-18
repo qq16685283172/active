@@ -18,7 +18,7 @@ body {
 .card {
   text-align: center;
   padding: 48px 32px;
-  max-width: 480px;
+  max-width: 520px;
   margin: 20px;
 }
 .icon {
@@ -28,31 +28,63 @@ body {
 h1 {
   font-size: 24px;
   color: #ffd700;
-  margin-bottom: 12px;
+  margin-bottom: 8px;
   line-height: 1.4;
 }
 .desc {
-  font-size: 16px;
-  color: rgba(255,255,255,0.6);
-  margin-bottom: 32px;
+  font-size: 15px;
+  color: rgba(255,255,255,0.55);
+  margin-bottom: 36px;
 }
-.download-btn {
+.doc-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.doc-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(212,168,83,0.18);
+  border-radius: 12px;
+  padding: 18px 22px;
+  text-align: left;
+  gap: 14px;
+}
+.doc-info {
+  flex: 1;
+  min-width: 0;
+}
+.doc-name {
+  font-size: 16px;
+  font-weight: 700;
+  color: #ffd700;
+  margin-bottom: 4px;
+}
+.doc-desc {
+  font-size: 13px;
+  color: rgba(255,255,255,0.4);
+}
+.doc-btn {
+  flex-shrink: 0;
   display: inline-block;
-  padding: 16px 48px;
+  padding: 10px 24px;
   background: linear-gradient(135deg, #c41e3a, #a3162a);
   color: #fff;
-  font-size: 18px;
+  font-size: 15px;
   font-weight: 700;
   text-decoration: none;
-  border-radius: 50px;
-  letter-spacing: 0.06em;
+  border-radius: 8px;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
 }
-.download-btn:hover {
+.doc-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 24px rgba(196,30,58,0.35);
+  box-shadow: 0 4px 20px rgba(196,30,58,0.35);
 }
 .footer-text {
-  margin-top: 24px;
+  margin-top: 32px;
   font-size: 13px;
   color: rgba(255,255,255,0.3);
 }
@@ -61,11 +93,24 @@ h1 {
 <body>
 <div class="card">
   <div class="icon">&#x1F389;</div>
-  <h1>恭喜你解锁里程碑<br>「新人报道」</h1>
-  <p class="desc">成功参与百日炼兵计划</p>
-  <a class="download-btn" href="https://qq16685283172.github.io/active/逃顶实战手册.pdf" download>
-    下载逃顶实战手册（PDF）
-  </a>
+  <h1>恭喜你解锁里程碑「新人报道」</h1>
+  <p class="desc">成功参与百日炼兵计划，请选择要下载的资料</p>
+  <div class="doc-list">
+    <div class="doc-item">
+      <div class="doc-info">
+        <div class="doc-name">逃顶实战手册</div>
+        <div class="doc-desc">精准逃顶 · 实战为王</div>
+      </div>
+      <a class="doc-btn" href="https://qq16685283172.github.io/active/逃顶实战手册.pdf" download>下载</a>
+    </div>
+    <div class="doc-item">
+      <div class="doc-info">
+        <div class="doc-name">顶级游资涨停宝典</div>
+        <div class="doc-desc">游资手法 · 涨停逻辑</div>
+      </div>
+      <a class="doc-btn" href="https://qq16685283172.github.io/active/顶级游资涨停宝典新.pdf" download>下载</a>
+    </div>
+  </div>
   <p class="footer-text">弘历软件 · 百日炼兵成长计划</p>
 </div>
 </body>
