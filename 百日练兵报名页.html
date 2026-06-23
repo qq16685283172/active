@@ -508,6 +508,16 @@ body {
   gap: clamp(12px,2vw,20px);
   margin-bottom: clamp(20px,3vh,32px);
 }
+/* 活动结束卡片 */
+.ended-card {
+  text-align: center;
+  padding: clamp(24px,4vw,36px) clamp(16px,3vw,24px);
+  background: #fff;
+  border: 2px solid #c41e3a;
+  border-radius: 12px;
+  max-width: 480px;
+  margin: 0 auto clamp(20px,3vh,32px);
+}
 
 .su-btn {
   padding: clamp(12px,1.8vh,18px) clamp(28px,4vw,48px);
@@ -631,10 +641,50 @@ body {
   letter-spacing: .06em;
 }
 
+/* 活动结束顶部通知条 */
+.ended-banner {
+  position: sticky;
+  top: 0;
+  z-index: 9999;
+  background: linear-gradient(135deg, #1a1a1a, #2d1414);
+  border-bottom: 2px solid #c41e3a;
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.ended-banner .eb-text {
+  color: #ffd700;
+  font-size: 14px;
+  font-weight: 700;
+}
+.ended-banner .eb-sub {
+  color: rgba(255,255,255,0.6);
+  font-size: 12px;
+}
+.ended-banner .eb-close {
+  background: none;
+  border: 1px solid rgba(255,255,255,0.2);
+  color: rgba(255,255,255,0.5);
+  padding: 3px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
     </style>
 <script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js"></script>
 </head>
 <body>
+
+<!-- 活动结束通知条 -->
+<div class="ended-banner" id="endedBanner">
+  <span class="eb-text">活动已结束</span>
+  <span class="eb-sub">全新里程碑机制即将上线，敬请期待</span>
+  <button class="eb-close" onclick="document.getElementById('endedBanner').style.display='none'">✕</button>
+</div>
 
 <!-- 加载遮罩 -->
 <div class="loader-overlay" id="loaderOverlay">
@@ -755,34 +805,17 @@ body {
 <section class="signup section-fade" id="signup">
     <h2>立即报名</h2>
     <p class="su-sub">抢占名额，开启百日成长之旅</p>
-    <!-- 选项区域 -->
-    <div class="signup-options" id="signupOptions">
-        <button class="su-btn su-btn-yes" onclick="handleAlreadySignedUp()">我已报名，直接下载资料</button>
-        <button class="su-btn su-btn-no" onclick="handleWantToSignUp()">我要报名</button>
-    </div>
-    <!-- 飞书报名（默认隐藏） -->
-    <div class="signup-card" id="signupCard" style="display:none;">
-        <p class="su-tip">精网号为 8 位数字，请准确填写，提交后将自动返回</p>
-        <iframe
-            src="https://si6lvzn46p9.feishu.cn/share/base/form/shrcnwGYV5aBakxzS3d2fpH5ntd"
-            frameborder="0"
-            scrolling="no"
-            class="feishu-iframe"
-        ></iframe>
-        <div style="text-align:center; margin-top:12px;">
-            <a href="https://si6lvzn46p9.feishu.cn/share/base/form/shrcnwGYV5aBakxzS3d2fpH5ntd" target="_blank" style="display:inline-block;padding:10px 20px;border:1px solid #c41e3a;border-radius:6px;color:#c41e3a;text-decoration:none;font-size:14px;">表单显示不全？点此新窗口打开</a>
-        </div>
+    <!-- 活动已结束通知 -->
+    <div class="ended-card">
+        <div style="font-size:18px;font-weight:700;color:#c41e3a;margin-bottom:6px;">活动已结束</div>
+        <div style="font-size:14px;color:#666;">全新里程碑机制即将上线，敬请期待</div>
     </div>
     <!-- 报名成功里程碑（默认隐藏） -->
     <div class="milestone" id="milestoneBlock" style="display:none;">
         <div class="ms-icon">&#x1F389;</div>
         <div class="ms-title">恭喜你解锁里程碑「新人报道」</div>
         <div class="ms-desc">成功参与百日炼兵计划</div>
-        <div style="display:flex; flex-direction:column; gap:10px; align-items:center;">
-            <a class="ms-download" href="逃顶实战手册.pdf" download>&#x1F4E5; 下载逃顶实战手册（PDF）</a>
-            <a class="ms-download" href="顶级游资涨停宝典新.pdf" download>&#x1F4E5; 下载顶级游资涨停宝典（PDF）</a>
-            <a class="ms-download" href="领航进阶宝典.pdf" download>&#x1F4E5; 下载领航进阶宝典（PDF）</a>
-        </div>
+        <div style="font-size:14px;color:#c41e3a;font-weight:700;margin-top:12px;">活动已结束，全新里程碑机制即将上线</div>
     </div>
 </section>
 

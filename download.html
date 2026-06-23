@@ -88,9 +88,59 @@ h1 {
   font-size: 13px;
   color: rgba(255,255,255,0.3);
 }
+/* 活动结束通知 */
+.ended-banner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  background: linear-gradient(135deg, #1a1a1a, #2d1414);
+  border-bottom: 2px solid #c41e3a;
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.ended-banner .eb-text {
+  color: #ffd700;
+  font-size: 15px;
+  font-weight: 700;
+  text-align: center;
+}
+.ended-banner .eb-sub {
+  color: rgba(255,255,255,0.6);
+  font-size: 13px;
+}
+.ended-banner .eb-close {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: 1px solid rgba(255,255,255,0.2);
+  color: rgba(255,255,255,0.5);
+  padding: 4px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 13px;
+}
+.doc-btn.disabled {
+  background: #555;
+  cursor: not-allowed;
+  pointer-events: none;
+  opacity: 0.6;
+}
 </style>
 </head>
 <body>
+<div class="ended-banner" id="endedBanner">
+  <span class="eb-text">活动已结束</span>
+  <span class="eb-sub">全新里程碑机制即将上线，敬请期待</span>
+  <button class="eb-close" onclick="document.getElementById('endedBanner').style.display='none'">✕</button>
+</div>
 <div class="card">
   <div class="icon">&#x1F389;</div>
   <h1>恭喜你解锁里程碑「新人报道」</h1>
@@ -101,24 +151,29 @@ h1 {
         <div class="doc-name">逃顶实战手册</div>
         <div class="doc-desc">精准逃顶 · 实战为王</div>
       </div>
-      <a class="doc-btn" href="https://qq16685283172.github.io/active/逃顶实战手册.pdf" download>下载</a>
+      <a class="doc-btn" href="#" onclick="showEnded();return false;">下载</a>
     </div>
     <div class="doc-item">
       <div class="doc-info">
         <div class="doc-name">顶级游资涨停宝典</div>
         <div class="doc-desc">游资手法 · 涨停逻辑</div>
       </div>
-      <a class="doc-btn" href="https://qq16685283172.github.io/active/顶级游资涨停宝典新.pdf" download>下载</a>
+      <a class="doc-btn" href="#" onclick="showEnded();return false;">下载</a>
     </div>
     <div class="doc-item">
       <div class="doc-info">
         <div class="doc-name">领航进阶宝典</div>
         <div class="doc-desc">趋势领航 · 进阶之道</div>
       </div>
-      <a class="doc-btn" href="https://qq16685283172.github.io/active/领航进阶宝典.pdf" download>下载</a>
+      <a class="doc-btn" href="#" onclick="showEnded();return false;">下载</a>
     </div>
   </div>
   <p class="footer-text">弘历软件 · 百日炼兵成长计划</p>
 </div>
+<script>
+function showEnded() {
+  alert('活动已结束，全新里程碑机制即将上线，敬请期待！');
+}
+</script>
 </body>
 </html>
